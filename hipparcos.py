@@ -1,7 +1,7 @@
 import sys
 
 # |name      |ra           |dec          |parallax|lii         |bii         |vmag |bv_color|
-'''
+
 import urllib.request
 from bs4 import BeautifulSoup
 import math
@@ -114,12 +114,12 @@ nameS = []
 for line in sys.stdin:
   xs = line.strip().split(',')
 
-  '''ys = []
+  ys = []
   for x in xs:
     if x != '':
       ys += [x]
 
-  xs = ys'''
+  xs = ys
 
   #s += "{" + "num:{},code:\"{}\",cons:\"{}\"".format(xs[0].strip(),xs[1].strip(),xs[2].strip()) + "},"
   #s += "{" + "num:{},name:\"{}\"".format(xs[0].strip(),xs[1].strip()) + "},"
@@ -134,4 +134,4 @@ for e in nameS:
 s = s[:-1]
 s += "]"
 
-print(s)
+print(s)'''
