@@ -426,6 +426,7 @@ function render()
   ctx.fillText( "Magnify (Z Key)", 20, iY ); iY += 40; 
   ctx.fillText( "Star Info (Click)", 20, iY ); iY += 40; 
   ctx.fillText( "Cons Tour (Space)", 20, iY ); iY += 40; 
+  ctx.fillText( "Rotate (Arrow Key)", 20, iY ); iY += 40;
 
   if( focusSt != -1 )
   {
