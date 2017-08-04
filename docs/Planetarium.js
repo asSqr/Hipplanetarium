@@ -182,7 +182,7 @@ var focusSt = -1, focusCons = -1;
 var q = Quaternion.defQ, toQ = Quaternion.defQ;
 var Rad = Math.PI/180;
 var scale = 320, toS = 320, srat = 0, tosrat = 0;
-var consEm = true, consF = true, starNameF = false, consNameF = 1;
+var consEm = true, consF = true, starNameF = false, consNameF = 1, isMag = false;
 var mode = 0;
 var mX, mY;
 
@@ -232,7 +232,6 @@ document.onkeydown = event => {
       toQ = Quaternion.qMul( Quaternion.rotYQ(15*Rad), toQ );
       break;
     case 90: // Z
-      toS = 700;
       break;
     case 16: // Shift
       isShift = true;
@@ -246,7 +245,7 @@ document.onkeyup = event => {
   switch( keyEvent.keyCode )
   {
     case 90: // Z
-      toS = 320;
+      isMag ^= true;
       break;
     case 65: // A
       consEm ^= true;
@@ -303,6 +302,8 @@ function render()
 
   q = Quaternion.qSlerp( q, toQ, 0.1 );
   scale = morph( scale, toS, 10 );
+
+  toS = isMag ? 700 : 320;
 
   tosrat = mode==0?0:mode==1?1:1000;
 
