@@ -119,12 +119,22 @@ function glowArc( x, y, r, red, green, blue, alpha )
 
 var vmagMin = Number.POSITIVE_INFINITY, vmagMax = Number.NEGATIVE_INFINITY;
 var starsfN = {};
+var maxRGB = 0;
 for( var st of stars )
 {
   vmagMin = Math.min( vmagMin, st.vmag );
   vmagMax = Math.max( vmagMax, st.vmag );
   starsfN[st.num] = st;
+
+  if( st.r >= 0 && st.g >= 0 && st.b >= 0 )
+  {
+    maxRGB = Math.max( maxRGB, st.r );
+    maxRGB = Math.max( maxRGB, st.g );
+    maxRGB = Math.max( maxRGB, st.b );
+  }
 }
+
+maxRGB = 300;
 
 var consS = new Set(), consC = {}, consLLC = {}, star2Cons = {};
 
@@ -411,7 +421,10 @@ function render()
           alpha = 3**(-(st.vmag-vmagMin)/(mode<=1?8:20));
       }
 
-      glowArc( v.x, v.y, 3, Math.min(255, Math.floor(st.r)), Math.min(255, Math.floor(st.g)), Math.min(255, Math.floor(st.b)), alpha/*(st.vmag-vmagMin)/(vmagMax-vmagMin)*/ );
+      //console.log(Math.floor(st.r*255/maxRGB), Math.floor(st.g*255/maxRGB), Math.floor(st.b*255/maxRGB));
+      var hsv = RGBtoHSV(Math.floor(st.r),Math.floor(st.g),Math.floor(st.b));
+      var rgb = HSVtoRGB(hsv.h,hsv.s,255);
+      glowArc( v.x, v.y, 3, rgb.r, rgb.g, rgb.b, alpha/*(st.vmag-vmagMin)/(vmagMax-vmagMin)*/ );
     }
   }
 

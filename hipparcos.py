@@ -53,12 +53,18 @@ for line in sys.stdin:
   X1 = 0
   Y1 = 0
   Z1 = 0
+  bdS = 0
 
   for i in range(81):
     l = (380+5*i)
     X1 += cols[i][0]/l**5/(math.exp(1.439e7/l/temp)-1)
     Y1 += cols[i][1]/l**5/(math.exp(1.439e7/l/temp)-1)
-    Z1 += cols[i][2]/l**5/(math.exp(1.439e7/l/temp)-1)    
+    Z1 += cols[i][2]/l**5/(math.exp(1.439e7/l/temp)-1) 
+    bdS += 1/l**5/(math.exp(1.439e7/l/temp)-1)   
+
+  X1 /= bdS
+  Y1 /= bdS
+  Z1 /= bdS
 
   x = X1/(X1+Y1+Z1)
   y = Y1/(X1+Y1+Z1)
@@ -67,13 +73,13 @@ for line in sys.stdin:
   X = Y/y*x
   Z = Y/y*(1-x-y)
 
-  R = 3.2410*X-1.5374*Y-0.4986*Z
-  G = -0.9692*X+1.8760*Y+0.0416*Z
-  B = 0.0556*X-0.2040*Y+1.0570*Z
+  R = 3.2410*X1-1.5374*Y1-0.4986*Z1
+  G = -0.9692*X1+1.8760*Y1+0.0416*Z1
+  B = 0.0556*X1-0.2040*Y1+1.0570*Z1
 
-  r = R*256
-  g = G*256
-  b = B*256
+  r = R*255
+  g = G*255
+  b = B*255
 
   #r = R**(1/2.2)*256
   #g = G**(1/2.2)*256
