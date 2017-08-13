@@ -293,7 +293,7 @@ document.onkeyup = event => {
   }
 };
 
-function render()
+(function render()
 {
   var w = cvs.width, h = cvs.height;
 
@@ -470,7 +470,9 @@ function render()
     ctx.fillText( "Declination: "+consLLC[consNameS[focusCons]].decl, 20, iY ); iY += 20; 
     ctx.fillText( "next: Space, prev: Shift+Space", 20, iY ); iY += 20; 
   }
-}
+
+  requestAnimationFrame( render );
+})();
 
 //render();
-setInterval( render, 1000/60 );
+//setInterval( render, 1000/60 );
